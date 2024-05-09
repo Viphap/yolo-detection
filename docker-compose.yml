@@ -1,8 +1,14 @@
 version: '3'
 
+networks:
+    yolov8-net:
+        driver: bridge
+
 services:
     yolov8:
         build:
             context: .
         ports:
             - 5000:5000
+        networks:
+            - yolov8-net
