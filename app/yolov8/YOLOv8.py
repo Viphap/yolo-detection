@@ -3,7 +3,6 @@ import time
 import cv2
 import numpy as np
 import onnxruntime
-import torch
 
 from app.yolov8.utils import draw_detections, multiclass_nms, xywh2xyxy
 
