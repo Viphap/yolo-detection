@@ -1,19 +1,27 @@
-FROM python:3.12.3-slim
+FROM nvidia/cuda:12.4.1-cudnn-devel-ubuntu20.04
 
 RUN apt-get update -y && apt-get upgrade -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install software-properties-common -y
+RUN add-apt-repository ppa:deadsnakes/ppa -y
+RUN apt-get install -y python3.10
 RUN apt-get install -y \
-        wget \
-        libgl1-mesa-dev \
-        libglib2.0-0
+    curl \
+    wget \
+    libgl1-mesa-dev \
+    libglib2.0-0
+
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+RUN ln -fs /usr/bin/python3.10 /usr/bin/python
 
 ARG WORKDIR=/home/app
 WORKDIR /home/app
 COPY . ./
 
-RUN pip install -r requirements.txt
+RUN pip3.10 install --upgrade setuptools
+RUN pip3.10 install -r requirements.txt
 
 RUN sh ${WORKDIR}/init.sh
 
 EXPOSE 5000
 
-CMD [ "flask", "run", "--host", "0.0.0.0", "--port", "5000" ]
+CMD [ "python3.10", "-m", "flask", "run", "--host", "0.0.0.0", "--port", "5000" ]

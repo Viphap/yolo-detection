@@ -3,6 +3,7 @@ import time
 import cv2
 import numpy as np
 import onnxruntime
+import torch
 
 from app.yolov8.utils import draw_detections, multiclass_nms, xywh2xyxy
 
@@ -22,8 +23,10 @@ class YOLOv8:
 
 
     def initialize_model(self, path):
-        self.session = onnxruntime.InferenceSession(path,
-                                                    providers=onnxruntime.get_available_providers())
+        # self.session = onnxruntime.InferenceSession(path,
+                                                    # providers=onnxruntime.get_available_providers())
+        self.session = onnxruntime.InferenceSession(path, providers=['CPUExecutionProvider'])
+
         # Get model info
         self.get_input_details()
         self.get_output_details()

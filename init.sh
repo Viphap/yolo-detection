@@ -9,6 +9,3 @@ if [ ! -d "$MODELS_DIR"]; then
     mkdir "$MODELS_DIR"
 fi
 wget -P "$MODELS_DIR" "https://github.com/xuantruongpham/yolov8-server/releases/download/model/yolov8m.onnx"
-
-echo "Installing onnxruntime..."
-pip install onnxruntime

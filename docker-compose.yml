@@ -6,9 +6,15 @@ networks:
 
 services:
     yolov8:
-        build:
-            context: .
+        images: yolov8-server:latest
         ports:
             - 5000:5000
         networks:
             - yolov8-net
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          count: 1
+                          capabilities: [gpu]
