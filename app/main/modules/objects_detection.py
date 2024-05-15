@@ -4,7 +4,7 @@ from PIL import Image
 from app.yolov8.utils import CLASS_NAMES
 from app.yolov8.YOLOv8 import YOLOv8
 
-model_path = 'app/yolov8/models/yolov8m.onnx'
+model_path = 'app/yolov8/models/model.onnx'
 yolov8_detector = YOLOv8(model_path, conf_thres=0.2, iou_thres=0.3)
 
 def detect(file):
