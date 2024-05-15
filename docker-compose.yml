@@ -6,7 +6,8 @@ networks:
 
 services:
     yolov8:
-        images: yolov8-server:latest
+        build:
+            context: .
         ports:
             - 5000:5000
         networks:
