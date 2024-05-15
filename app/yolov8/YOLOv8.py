@@ -7,6 +7,8 @@ import onnxruntime
 from app.yolov8.utils import draw_detections, multiclass_nms, xywh2xyxy
 
 
+print(f'YoloV8 running on {onnxruntime.get_device()}')
+
 class YOLOv8:
 
     def __init__(self, path, conf_thres=0.7, iou_thres=0.5):
@@ -22,6 +24,7 @@ class YOLOv8:
 
 
     def initialize_model(self, path):
+        print(f'Available providers: {onnxruntime.get_available_providers()}')
         self.session = onnxruntime.InferenceSession(path, providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
         # Get model info
         self.get_input_details()
