@@ -59,7 +59,7 @@ elif [ -x "$(command -v yum)" ]; then
 
     # CUDA DNN
     echo "Installing cudnn..."
-    wget https://developer.nvidia.com/downloads/compute/cudnn/secure/8.9.2/local_installers/11.x/cudnn-local-repo-rhel7-8.9.2.26-1.0-1.x86_64.rpm/
+    wget https://github.com/xuantruongpham/yolov8-server/releases/download/resources/cudnn-local-repo-rhel7-8.9.2.26-1.0-1.x86_64.rpm
     sudo rpm -i cudnn-local-repo-rhel8-9.1.1-1.0-1.x86_64.rpm
     sudo yum clean all
     sudo yum -y install cudnn-cuda-11
