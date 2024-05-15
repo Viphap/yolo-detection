@@ -10,6 +10,8 @@ services:
             context: .
         ports:
             - 5000:5000
+        environment:
+            - YOLO_MODEL=yolov8l.onnx
         networks:
             - yolov8-net
         deploy:

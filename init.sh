@@ -8,4 +8,4 @@ MODELS_DIR=$ROOT_DIR/app/yolov8/models
 if [ ! -d "$MODELS_DIR"]; then
     mkdir "$MODELS_DIR"
 fi
-wget -P "$MODELS_DIR" "https://github.com/xuantruongpham/yolov8-server/releases/download/resources/yolov8m.onnx"
+wget -P "$MODELS_DIR" "https://github.com/xuantruongpham/yolov8-server/releases/download/resources/${YOLO_MODEL}"
