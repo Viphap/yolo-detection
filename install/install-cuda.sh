@@ -15,12 +15,6 @@ if [ -x "$(command -v apt)" ]; then
     sudo apt-get install -y cuda-11-8
     sudo apt-get install -y cuda-toolkit-11-8
 
-    # Driver
-    echo "Installing nvidia-driver-550"
-    sudo apt-get update
-    sudo apt-get install -y nvidia-driver-550-open
-    sudo apt-get install -y cuda-drivers-550
-
     # CUDA DNN
     echo "Installing cudnn..."
     wget https://github.com/xuantruongpham/yolov8-server/releases/download/resources/cudnn-local-repo-ubuntu2004-8.9.2.26_1.0-1_amd64.deb
@@ -29,9 +23,9 @@ if [ -x "$(command -v apt)" ]; then
     sudo apt-get update
     sudo apt-get -y install cudnn-cuda-11
 
-    export PATH=/usr/local/cuda-11.8/bin:$PATH
-    export PATH=/usr/local/cuda-11.8/targets/x86_64-linux/lib:$PATH
-    export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH
+    echo 'export PATH=/usr/local/cuda-11.8/bin:$PATH' >> ~/.bash_profile
+    echo 'export PATH=/usr/local/cuda-11.8/targets/x86_64-linux/lib:$PATH' >> ~/.bash_profile
+    echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH' >> ~/.bash_profile
 
     # Cleanup
     echo "-- Cleaning Up --"
@@ -51,22 +45,16 @@ elif [ -x "$(command -v yum)" ]; then
     sudo yum install -y cuda-11-8
     sudo yum install -y cuda-toolkit-11-8
 
-    # Driver
-    echo "Installing nvidia-driver-550"
-    sudo yum update
-    sudo yum install -y nvidia-driver-550-open
-    sudo yum install -y cuda-drivers-550
-
     # CUDA DNN
     echo "Installing cudnn..."
     wget https://github.com/xuantruongpham/yolov8-server/releases/download/resources/cudnn-local-repo-rhel7-8.9.2.26-1.0-1.x86_64.rpm
-    sudo rpm -i cudnn-local-repo-rhel8-9.1.1-1.0-1.x86_64.rpm
+    sudo rpm -i cudnn-local-repo-rhel7-8.9.2.26-1.0-1.x86_64.rpm
     sudo yum clean all
     sudo yum -y install cudnn-cuda-11
 
-    export PATH=/usr/local/cuda-11.8/bin:$PATH
-    export PATH=/usr/local/cuda-11.8/targets/x86_64-linux/lib:$PATH
-    export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH
+    echo 'export PATH=/usr/local/cuda-11.8/bin:$PATH' >> ~/.bash_profile
+    echo 'export PATH=/usr/local/cuda-11.8/targets/x86_64-linux/lib:$PATH' >> ~/.bash_profile
+    echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH' >> ~/.bash_profile
 
     # Cleanup
     echo "-- Cleaning Up --"
