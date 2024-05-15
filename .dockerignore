@@ -27,3 +27,5 @@ logs/
 
 # Exclude models
 models/
+
+docker-compose.yml
