@@ -4,12 +4,6 @@ echo "-- Installing CUDA Toolkit and CUDA DNN --"
 echo "------------------------------------------"
 # Install CUDA Drivers and Toolkit
 if [ -x "$(command -v apt)" ]; then
-    # Driver
-    echo "Installing nvidia-driver-550"
-    sudo apt-get update
-    sudo apt-get install -y nvidia-driver-550-open
-    sudo apt-get install -y cuda-drivers-550
-
     # CUDA
     wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
     sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
@@ -20,6 +14,12 @@ if [ -x "$(command -v apt)" ]; then
     sudo apt-get update
     sudo apt-get install -y cuda-11-8
     sudo apt-get install -y cuda-toolkit-11-8
+
+    # Driver
+    echo "Installing nvidia-driver-550"
+    sudo apt-get update
+    sudo apt-get install -y nvidia-driver-550-open
+    sudo apt-get install -y cuda-drivers-550
 
     # CUDA DNN
     echo "Installing cudnn..."
@@ -37,6 +37,41 @@ if [ -x "$(command -v apt)" ]; then
     echo "-- Cleaning Up --"
     sudo rm -f cuda-repo-ubuntu2004-11-8-local_11.8.0-520.61.05-1_amd64.deb
     sudo rm -f cudnn-local-repo-ubuntu2004-8.9.2.26_1.0-1_amd64.deb
+
+elif [ -x "$(command -v yum)" ]; then
+    sudo yum update
+    sudo yum install -y wget
+
+    # CUDA
+    echo "Downloading CUDA..."
+    wget https://developer.download.nvidia.com/compute/cuda/11.8.0/local_installers/cuda-repo-rhel7-11-8-local-11.8.0_520.61.05-1.x86_64.rpm
+    sudo rpm -i cuda-repo-rhel7-11-8-local-11.8.0_520.61.05-1.x86_64.rpm
+    sudo yum clean all
+    sudo yum install -y nvidia-driver-latest-dkms
+    sudo yum install -y cuda-11-8
+    sudo yum install -y cuda-toolkit-11-8
+
+    # Driver
+    echo "Installing nvidia-driver-550"
+    sudo yum update
+    sudo yum install -y nvidia-driver-550-open
+    sudo yum install -y cuda-drivers-550
+
+    # CUDA DNN
+    echo "Installing cudnn..."
+    wget https://developer.nvidia.com/downloads/compute/cudnn/secure/8.9.2/local_installers/11.x/cudnn-local-repo-rhel7-8.9.2.26-1.0-1.x86_64.rpm/
+    sudo rpm -i cudnn-local-repo-rhel8-9.1.1-1.0-1.x86_64.rpm
+    sudo yum clean all
+    sudo yum -y install cudnn-cuda-11
+
+    export PATH=/usr/local/cuda-11.8/bin:$PATH
+    export PATH=/usr/local/cuda-11.8/targets/x86_64-linux/lib:$PATH
+    export LD_LIBRARY_PATH=/usr/local/cuda-11.8/lib64:$LD_LIBRARY_PATH
+
+    # Cleanup
+    echo "-- Cleaning Up --"
+    sudo rm -f cuda-repo-rhel7-11-8-local-11.8.0_520.61.05-1.x86_64.rpm
+    sudo rm -f cudnn-local-repo-rhel8-9.1.1-1.0-1.x86_64.rpm
 fi
 
 echo "------------------------------"
