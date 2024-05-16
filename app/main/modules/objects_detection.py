@@ -1,17 +1,16 @@
 import numpy as np
 from PIL import Image
 
-from app.yolov8.utils import CLASS_NAMES
-from app.yolov8.YOLOv8 import YOLOv8
+from app.yolo.utils import CLASS_NAMES
+from app.yolo.YOLO import YOLO
 
-model_path = 'app/yolov8/models/yolov8m.onnx'
-yolov8_detector = YOLOv8(model_path, conf_thres=0.2, iou_thres=0.3)
+yolo_detector = YOLO(conf_thres=0.2, iou_thres=0.3)
 
 def detect(file):
     image = Image.open(file.stream).convert('RGB')
     image = np.array(image)
 
-    boxes, scores, class_ids = yolov8_detector(image)
+    boxes, scores, class_ids = yolo_detector(image)
 
     detections = []
     for i in range(len(boxes)):

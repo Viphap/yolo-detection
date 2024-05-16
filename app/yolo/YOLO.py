@@ -1,20 +1,28 @@
+import os
 import time
 
 import cv2
 import numpy as np
 import onnxruntime
 
-from app.yolov8.utils import draw_detections, multiclass_nms, xywh2xyxy
+from app.yolo.utils import draw_detections, multiclass_nms, xywh2xyxy
 
 
-class YOLOv8:
+print(f'Yolo running on {onnxruntime.get_device()}')
+print(f'Using model: {os.environ.get("MODEL")}')
+print(f'Available providers: {onnxruntime.get_available_providers()}')
 
-    def __init__(self, path, conf_thres=0.7, iou_thres=0.5):
+providers = ['CPUExecutionProvider']
+
+class YOLO:
+
+    def __init__(self, conf_thres=0.7, iou_thres=0.5):
+        self.path = f'app/yolo/models/{os.environ.get("MODEL")}.onnx'
         self.conf_threshold = conf_thres
         self.iou_threshold = iou_thres
 
         # Initialize model
-        self.initialize_model(path)
+        self.initialize_model(self.path)
 
 
     def __call__(self, image):
@@ -22,10 +30,7 @@ class YOLOv8:
 
 
     def initialize_model(self, path):
-        # self.session = onnxruntime.InferenceSession(path,
-                                                    # providers=onnxruntime.get_available_providers())
-        self.session = onnxruntime.InferenceSession(path, providers=['CPUExecutionProvider'])
-
+        self.session = onnxruntime.InferenceSession(path, providers=providers)
         # Get model info
         self.get_input_details()
         self.get_output_details()
