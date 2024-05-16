@@ -1,22 +1,24 @@
+import os
 import time
 
 import cv2
 import numpy as np
 import onnxruntime
 
-from app.yolov8.utils import draw_detections, multiclass_nms, xywh2xyxy
+from app.yolo.utils import draw_detections, multiclass_nms, xywh2xyxy
 
 
-print(f'YoloV8 running on {onnxruntime.get_device()}')
+print(f'Yolo running on {onnxruntime.get_device()}')
 
-class YOLOv8:
+class YOLO:
 
-    def __init__(self, path, conf_thres=0.7, iou_thres=0.5):
+    def __init__(self, conf_thres=0.7, iou_thres=0.5):
+        self.path = f'app/yolo/models/{os.environ.get('MODEL')}.onnx'
         self.conf_threshold = conf_thres
         self.iou_threshold = iou_thres
 
         # Initialize model
-        self.initialize_model(path)
+        self.initialize_model(self.path)
 
 
     def __call__(self, image):

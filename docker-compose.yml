@@ -1,16 +1,18 @@
 version: '3'
 
 networks:
-    yolov8-net:
+    yolo-net:
         driver: bridge
 
 services:
-    yolov8:
-        image: viphap/yolov8-server:latest
+    yolo:
+        image: viphap/yolo-server:latest
+        environment:
+            - MODEL=yolov8l
         ports:
             - 5000:5000
         networks:
-            - yolov8-net
+            - yolo-net
         deploy:
             resources:
                 reservations:
@@ -18,4 +20,5 @@ services:
                         - driver: nvidia
                           count: 1
                           capabilities: [gpu]
+        command: /bin/sh -c "init.sh"
         restart: always

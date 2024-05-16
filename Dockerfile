@@ -21,8 +21,6 @@ COPY . ./
 RUN pip3.10 install --upgrade setuptools
 RUN pip3.10 install -r requirements.txt
 
-RUN sh ${WORKDIR}/init.sh
-
 EXPOSE 5000
 
 CMD [ "python3.10", "-m", "flask", "run", "--host", "0.0.0.0", "--port", "5000" ]

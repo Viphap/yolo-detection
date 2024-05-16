@@ -17,7 +17,7 @@ if [ -x "$(command -v apt)" ]; then
 
     # CUDA DNN
     echo "Installing cudnn..."
-    wget https://github.com/xuantruongpham/yolov8-server/releases/download/resources/cudnn-local-repo-ubuntu2004-8.9.2.26_1.0-1_amd64.deb
+    wget https://github.com/xuantruongpham/yolo-server/releases/download/resources/cudnn-local-repo-ubuntu2004-8.9.2.26_1.0-1_amd64.deb
     sudo cp /var/cudnn-local-repo-ubuntu2004-8.9.2.26/cudnn-*-keyring.gpg /usr/share/keyrings/
     sudo dpkg -i cudnn-local-repo-ubuntu2004-8.9.2.26_1.0-1_amd64.deb
     sudo apt-get update
@@ -47,7 +47,7 @@ elif [ -x "$(command -v yum)" ]; then
 
     # CUDA DNN
     echo "Installing cudnn..."
-    wget https://github.com/xuantruongpham/yolov8-server/releases/download/resources/cudnn-local-repo-rhel7-8.9.2.26-1.0-1.x86_64.rpm
+    wget https://github.com/xuantruongpham/yolo-server/releases/download/resources/cudnn-local-repo-rhel7-8.9.2.26-1.0-1.x86_64.rpm
     sudo rpm -i cudnn-local-repo-rhel7-8.9.2.26-1.0-1.x86_64.rpm
     sudo yum clean all
     sudo yum -y install cudnn-cuda-11

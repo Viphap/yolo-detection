@@ -1,4 +1,4 @@
-# YoloV8 Server
+# Yolo Server
 
 ## Instalation
 
