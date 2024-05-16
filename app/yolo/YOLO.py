@@ -13,7 +13,7 @@ print(f'Yolo running on {onnxruntime.get_device()}')
 class YOLO:
 
     def __init__(self, conf_thres=0.7, iou_thres=0.5):
-        self.path = f'app/yolo/models/{os.environ.get('MODEL')}.onnx'
+        self.path = f'app/yolo/models/{os.environ.get("MODEL")}.onnx'
         self.conf_threshold = conf_thres
         self.iou_threshold = iou_thres
 
