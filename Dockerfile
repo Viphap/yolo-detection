@@ -22,8 +22,9 @@ RUN pip3.10 install --upgrade setuptools
 RUN pip3.10 install -r requirements.txt
 
 ENV MODEL=yolov8l
-
 RUN sh ${WORKDIR}/init.sh
+
+VOLUME ["./app/yolo/models"]
 
 EXPOSE 5000
 

@@ -9,6 +9,7 @@ from app.yolo.utils import draw_detections, multiclass_nms, xywh2xyxy
 
 
 print(f'Yolo running on {onnxruntime.get_device()}')
+print(f'Using model: {os.environ.get("MODEL")}')
 
 class YOLO:
 

@@ -11,6 +11,10 @@ services:
             - 5000:5000
         networks:
             - yolo-net
+        volumes:
+            - ./models:/home/app/app/yolo/models
+        environment:
+            - MODEL=yolov8l
         deploy:
             resources:
                 reservations:
