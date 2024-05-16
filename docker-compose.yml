@@ -7,8 +7,6 @@ networks:
 services:
     yolo:
         image: viphap/yolo-server:latest
-        environment:
-            - MODEL=yolov8l
         ports:
             - 5000:5000
         networks:
@@ -20,5 +18,4 @@ services:
                         - driver: nvidia
                           count: 1
                           capabilities: [gpu]
-        command: /bin/sh -c "init.sh"
         restart: always

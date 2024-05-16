@@ -2,6 +2,8 @@
 
 ## Installation
 
+> Tested on Ubuntu 20.04 and CentOS 7
+
 ### Install Docker for Nvidia
 
 Use this doc: [https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
