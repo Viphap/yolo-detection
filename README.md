@@ -1,6 +1,6 @@
 # Yolo Server
 
-## Instalation
+## Installation
 
 ### Install Docker for Nvidia
 
