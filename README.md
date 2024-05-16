@@ -41,5 +41,5 @@ docker compose up -d
 ### Run Flask on dev mode
 
 ```bash
-MODEL=model_name python3.10 -m flask run
+MODEL=model_name python3.10 -m flask run --debug
 ```

@@ -28,4 +28,8 @@ logs/
 # Exclude models
 models/
 
+# Stream videos
+results/
+videos/
+
 docker-compose.yml

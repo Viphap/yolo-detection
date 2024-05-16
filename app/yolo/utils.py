@@ -124,6 +124,7 @@ def draw_text(image: np.ndarray, text: str, box: np.ndarray, color: tuple[int, i
 
     return cv2.putText(image, text, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, font_size, (255, 255, 255), text_thickness, cv2.LINE_AA)
 
+
 def draw_masks(image: np.ndarray, boxes: np.ndarray, classes: np.ndarray, mask_alpha: float = 0.3) -> np.ndarray:
     mask_img = image.copy()
 
