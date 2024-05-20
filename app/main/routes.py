@@ -19,15 +19,15 @@ def detect():
     stream_fps = request.args.get('fps')
     s.create_stream(stream_ke, stream_id, stream_fps)
 
-    # detections, raw_result = od.detect(file)
-    # s.process_frame(
-    #     stream_id,
-    #     file,
-    #     raw_result['boxes'], raw_result['scores'], raw_result['class_ids']
-    # )
+    detections, raw_result = od.detect(file)
+    s.process_frame(
+        stream_id,
+        file,
+        raw_result['boxes'], raw_result['scores'], raw_result['class_ids']
+    )
 
-    detections = []
-    s.test_process_frame(stream_id, file)
+    # detections = []
+    # s.test_process_frame(stream_id, file)
 
     return jsonify(detections)
 
