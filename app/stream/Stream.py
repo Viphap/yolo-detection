@@ -3,6 +3,7 @@ import shutil
 import subprocess
 
 from app.yolo.utils import draw_detections
+from config import basedir
 
 
 class Stream:
@@ -17,7 +18,7 @@ class Stream:
 
 
     def create_stream_dir(self):
-        self.dir_path = f'../videos/{self.ke}/{self.id}'
+        self.dir_path = os.path.join(basedir, f'videos/{self.ke}/{self.id}')
         if not os.path.exists(self.dir_path):
             os.makedirs(self.dir_path)
         else:
@@ -25,8 +26,8 @@ class Stream:
 
 
     def build_ffmpeg_process(self):
-        hls_output = f'./videos/{self.ke}/{self.id}/s.m3u8'
-        segment_pattern = f'./videos/{self.ke}/{self.id}' + '/s%d.ts'
+        hls_output = os.path.join(self.dir_path, 's.m3u8')
+        segment_pattern = self.dir_path + '/s%d.ts'
 
         ffmpeg_command = [
             'ffmpeg',
@@ -39,10 +40,11 @@ class Stream:
             '-c:v', 'libx264',
             '-g', '1',
             '-f', 'hls',
-            '-hls_list_size', '10',
+            '-hls_list_size', '5',
             '-start_number', '0',
-            '-hls_time', '10',
+            '-hls_time', '5',
             '-hls_segment_filename', segment_pattern,
+            '-hls_flags', '+delete_segments+omit_endlist+discont_start',
             hls_output
         ]
 
@@ -81,4 +83,4 @@ class Stream:
 
 
     def get_stream_path(self, file_name):
-        return f'{self.dir_path}/{file_name}'
+        return os.path.join(self.dir_path, file_name)

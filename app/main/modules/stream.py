@@ -1,11 +1,14 @@
+import os
+
 import numpy as np
 from PIL import Image
 
 from app.stream.StreamsList import StreamsList
 from app.stream.utils import create_dir_ine
+from config import basedir
 
 
-create_dir_ine('./videos')
+create_dir_ine(os.path.join(basedir, 'videos'))
 streams_list = StreamsList()
 
 
@@ -29,4 +32,6 @@ def test_process_frame(id, file):
 
 def get_stream_path(id, file_name):
     stream = streams_list.get_stream(id)
+    if not stream:
+        return None
     return stream.get_stream_path(file_name)

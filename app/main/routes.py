@@ -1,4 +1,4 @@
-from flask import jsonify, request, send_file
+from flask import  abort, jsonify, request, send_file
 
 import app.main.modules.objects_detection as od
 import app.main.modules.stream as s
@@ -35,4 +35,6 @@ def detect():
 @bp.route('/stream/<ke>/<id>/<file_name>', methods=['GET'])
 def stream(ke, id, file_name):
     stream_path = s.get_stream_path(id, file_name)
+    if not stream_path:
+        return abort(404)
     return send_file(stream_path)

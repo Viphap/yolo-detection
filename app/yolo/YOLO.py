@@ -6,6 +6,7 @@ import numpy as np
 import onnxruntime
 
 from app.yolo.utils import draw_detections, multiclass_nms, xywh2xyxy
+from config import basedir
 
 
 print(f'Yolo running on {onnxruntime.get_device()}')
@@ -17,7 +18,7 @@ providers = ['CPUExecutionProvider']
 class YOLO:
 
     def __init__(self, conf_thres=0.7, iou_thres=0.5):
-        self.path = f'app/yolo/models/{os.environ.get("MODEL")}.onnx'
+        self.path = os.path.join(basedir, f'app/yolo/models/{os.environ.get("MODEL")}.onnx')
         self.conf_threshold = conf_thres
         self.iou_threshold = iou_thres
 
