@@ -1,7 +1,7 @@
 from flask import jsonify, request, send_file
 
 import app.main.modules.objects_detection as od
-import app.main.modules.stream as stream
+import app.main.modules.stream as s
 from app.main import bp
 
 
@@ -14,9 +14,25 @@ def detect():
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
 
-    detections = od.detect(file)
+    stream_ke = request.args.get('ke')
+    stream_id = request.args.get('id')
+    stream_fps = request.args.get('fps')
+    s.create_stream(stream_ke, stream_id, stream_fps)
+
+    # detections, raw_result = od.detect(file)
+    # s.process_frame(
+    #     stream_id,
+    #     file,
+    #     raw_result['boxes'], raw_result['scores'], raw_result['class_ids']
+    # )
+
+    detections = []
+    s.test_process_frame(stream_id, file)
+
     return jsonify(detections)
 
-@bp.route('/stream/<filename>', methods=['GET'])
-def stream(filename):
-    return send_file(f'/home/truongpx/repos/viphap/yolo-server/videos/u/v/I4jcU51Mh5/{filename}')
+
+@bp.route('/stream/<ke>/<id>/<file_name>', methods=['GET'])
+def stream(ke, id, file_name):
+    stream_path = s.get_stream_path(id, file_name)
+    return send_file(stream_path)
