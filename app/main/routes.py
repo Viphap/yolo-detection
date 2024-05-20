@@ -17,6 +17,9 @@ def detect():
     stream_ke = request.args.get('ke')
     stream_id = request.args.get('id')
     stream_fps = request.args.get('fps')
+    if not (stream_ke and stream_id and stream_fps):
+        return jsonify({'error': 'No stream args'}), 400
+
     s.create_stream(stream_ke, stream_id, stream_fps)
 
     detections, raw_result = od.detect(file)

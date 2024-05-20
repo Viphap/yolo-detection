@@ -6,8 +6,7 @@ networks:
 
 services:
     yolo:
-        build:
-            context: .
+        image: viphap/yolo-server:latest
         ports:
             - 5000:5000
         networks:
@@ -17,7 +16,7 @@ services:
             - ./videos:/home/app/videos
         environment:
             - MODEL=yolov8l
-            - YOLO_PROVIDER=CPUExecutionProvider
+            - YOLO_PROVIDER=CUDAExecutionProvider
         deploy:
             resources:
                 reservations:
