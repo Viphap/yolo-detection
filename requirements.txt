@@ -1,6 +1,6 @@
 Flask==3.0.3
 Flask-Cors==4.0.1
 numpy==1.24.4
-onnxruntime==1.17.1
+onnxruntime-gpu==1.17.1
 opencv-python==4.9.0.80
 pillow==10.3.0

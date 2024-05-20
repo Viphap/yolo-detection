@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import onnxruntime
 
-from app.yolo.utils import draw_detections, multiclass_nms, xywh2xyxy
+from app.yolo.utils import multiclass_nms, xywh2xyxy
 from config import basedir
 
 
@@ -13,7 +13,7 @@ print(f'Yolo running on {onnxruntime.get_device()}')
 print(f'Using model: {os.environ.get("MODEL")}')
 print(f'Available providers: {onnxruntime.get_available_providers()}')
 
-providers = ['CPUExecutionProvider']
+providers = ['CUDAExecutionProvider','CPUExecutionProvider']
 
 class YOLO:
 

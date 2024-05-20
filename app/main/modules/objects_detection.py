@@ -1,7 +1,7 @@
 import numpy as np
 from PIL import Image
 
-from app.yolo.utils import CLASS_NAMES, draw_detections
+from app.yolo.utils import CLASS_NAMES
 from app.yolo.YOLO import YOLO
 
 
