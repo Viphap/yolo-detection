@@ -12,13 +12,13 @@ class Stream:
         self.ke = ke
         self.id = id
         self.fps = fps
+        self.dir_path = os.path.join(basedir, f'videos/{self.ke}/{self.id}')
 
         self.create_stream_dir()
         self.build_ffmpeg_process()
 
 
     def create_stream_dir(self):
-        self.dir_path = os.path.join(basedir, f'videos/{self.ke}/{self.id}')
         if not os.path.exists(self.dir_path):
             os.makedirs(self.dir_path)
         else:
