@@ -6,8 +6,7 @@ networks:
 
 services:
     yolo:
-        build:
-            context: .
+        image: viphap/yolo-server:latest
         ports:
             - 5000:5000
         networks:
@@ -16,4 +15,11 @@ services:
             - ./models:/home/app/app/yolo/models
         environment:
             - MODEL=yolov8l
+        deploy:
+            resources:
+                reservations:
+                    devices:
+                        - driver: nvidia
+                          count: 1
+                          capabilities: [gpu]
         restart: always
