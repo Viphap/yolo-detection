@@ -13,8 +13,6 @@ print(f'Yolo running on {onnxruntime.get_device()}')
 print(f'Using model: {os.environ.get("MODEL")}')
 print(f'Available providers: {onnxruntime.get_available_providers()}')
 
-providers = ['CUDAExecutionProvider','CPUExecutionProvider']
-
 class YOLO:
 
     def __init__(self, conf_thres=0.7, iou_thres=0.5):
@@ -31,7 +29,7 @@ class YOLO:
 
 
     def initialize_model(self, path):
-        self.session = onnxruntime.InferenceSession(path, providers=providers)
+        self.session = onnxruntime.InferenceSession(path, providers=os.environ.get('YOLO_PROVIDER'))
         # Get model info
         self.get_input_details()
         self.get_output_details()
