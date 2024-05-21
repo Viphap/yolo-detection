@@ -16,8 +16,7 @@ def create_stream(ke, id, fps):
     streams_list.create_stream(ke, id, fps)
 
 
-def process_frame(id, file, boxes, scores, class_ids):
-    filestr = file.read()
+def process_frame(id, filestr, boxes, scores, class_ids):
     file_bytes = np.fromstring(filestr, np.uint8)
     image = cv2.imdecode(file_bytes, cv2.IMREAD_UNCHANGED)
 

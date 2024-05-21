@@ -22,10 +22,11 @@ def detect():
 
     s.create_stream(stream_ke, stream_id, stream_fps)
 
+    file_content = file.read()
     detections, raw_result = od.detect(file)
     s.process_frame(
         stream_id,
-        file,
+        file_content,
         raw_result['boxes'], raw_result['scores'], raw_result['class_ids']
     )
 
