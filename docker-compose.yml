@@ -16,7 +16,7 @@ services:
             - ./videos:/home/app/videos
         environment:
             - MODEL=yolov8l
-            - YOLO_PROVIDER=CUDAExecutionProvider
+            - YOLO_PROVIDERS=CUDAExecutionProvider
         deploy:
             resources:
                 reservations:

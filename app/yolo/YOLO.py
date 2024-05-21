@@ -12,6 +12,9 @@ from config import basedir
 print(f'Yolo running on {onnxruntime.get_device()}')
 print(f'Using model: {os.environ.get("MODEL")}')
 print(f'Available providers: {onnxruntime.get_available_providers()}')
+print(f'Using providers: {os.environ.get("YOLO_PROVIDERS")}')
+
+providers = os.environ.get("YOLO_PROVIDERS").split(',')
 
 class YOLO:
 
@@ -29,7 +32,7 @@ class YOLO:
 
 
     def initialize_model(self, path):
-        self.session = onnxruntime.InferenceSession(path, providers=os.environ.get('YOLO_PROVIDER'))
+        self.session = onnxruntime.InferenceSession(path, providers=providers)
         # Get model info
         self.get_input_details()
         self.get_output_details()
