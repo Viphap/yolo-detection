@@ -13,7 +13,6 @@ services:
             - yolo-net
         volumes:
             - ./models:/home/app/app/yolo/models
-            - ./videos:/home/app/videos
         environment:
             - MODEL=yolov8l
             - YOLO_PROVIDERS=CUDAExecutionProvider

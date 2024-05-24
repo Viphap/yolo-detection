@@ -7,7 +7,6 @@ RUN apt-get install -y python3.10
 RUN apt-get install -y \
     curl \
     wget \
-    ffmpeg \
     libgl1-mesa-dev \
     libglib2.0-0 \
     zlib1g

@@ -14,12 +14,6 @@ def detect(file):
     boxes, scores, class_ids = yolo_detector(image)
 
     detections = []
-    raw_result = {
-        'boxes': boxes,
-        'scores': scores,
-        'class_ids': class_ids
-    }
-
     for i in range(len(boxes)):
         detections.append({
             'tag': f'{CLASS_NAMES[class_ids[i]]} {str(round(scores[i], 2))}',
@@ -30,4 +24,4 @@ def detect(file):
             'height': float(boxes[i][3] - boxes[i][1]),
         })
 
-    return detections, raw_result
+    return detections

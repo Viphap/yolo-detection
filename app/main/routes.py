@@ -1,7 +1,6 @@
 from flask import  abort, jsonify, request, send_file
 
 import app.main.modules.objects_detection as od
-import app.main.modules.stream as s
 from app.main import bp
 
 
@@ -14,31 +13,6 @@ def detect():
     if file.filename == '':
         return jsonify({'error': 'No selected file'}), 400
 
-    stream_ke = request.args.get('ke')
-    stream_id = request.args.get('id')
-    stream_fps = request.args.get('fps')
-    if not (stream_ke and stream_id and stream_fps):
-        return jsonify({'error': 'No stream args'}), 400
-
-    s.create_stream(stream_ke, stream_id, stream_fps)
-
-    file_content = file.read()
-    detections, raw_result = od.detect(file)
-    s.process_frame(
-        stream_id,
-        file_content,
-        raw_result['boxes'], raw_result['scores'], raw_result['class_ids']
-    )
-
-    # detections = []
-    # s.test_process_frame(stream_id, file)
+    detections = od.detect(file)
 
     return jsonify(detections)
-
-
-@bp.route('/stream/<ke>/<id>/<file_name>', methods=['GET'])
-def stream(ke, id, file_name):
-    stream_path = s.get_stream_path(id, file_name)
-    if not stream_path:
-        return abort(404)
-    return send_file(stream_path)
